@@ -1,3 +1,5 @@
+# Reusable File Input Component With Livewire
+
 ## Installation
 
 ```
@@ -12,31 +14,103 @@ npm install --legacy-peer-deps
 npx mix
 ```
 
+## Dependencies
+- [Laravel](https://laravel.com/)
+- [Laravel Livewire](https://laravel-livewire.com/)
+- [AlpineJS](https://github.com/alpinejs/alpine/)
+
+## Livewire Component
+
+```php
+<?php
+
+namespace App\Http\Livewire;
+
+use Livewire\Component;
+use Livewire\WithFileUploads;
+
+class Profile extends Component
+{
+	use WithFileUploads;
+
+	public $name;
+	public $bio;
+	public $avatar;
+
+	public function updatedAvatar()
+  {
+    $this->validate([
+          'avatar' => ['required', 'mimes:jpeg,jpg,png', 'max:1024', 'dimensions:min_width=250,min_height=250'],
+      ]);
+  }
+
+	public function save() 
+	{
+		$this->validate([
+			'name' => ['required'],
+			'bio' => ['required'],
+			'avatar' => ['required', 'mimes:jpeg,jpg,png', 'max:1024', 'dimensions:min_width=250,min_height=250'],
+		]);
+
+    // save ...
+	}
+
+  public function render()
+  {
+      return view('livewire.profile');
+  }
+}
+```
+
+## Blade Component Usage
+
+```php
+// For single file upload
+<x-file-attachment 
+  :file="$attachment"
+  wire:model="attachment"
+/>
+```
+
+```php
+// For multiple file uploads
+<x-file-attachment 
+  :file="$attachments"
+  wire:model="attachments"
+  multiple
+/>
+```
+
+```php
+// For profile image upload
+<x-file-attachment 
+  :file="$avatar"
+  wire:model="avatar"
+  model="profile"
+/>
+```
+
 ## For Blade Form Submit
 
 ```php
-
 // For single image upload
 <input 
 	type="hidden" 
 	name="attachment" 
 	value="{{ $attachment->getFilename() }}"
 />
-
 ```
 
 ```php
-
 // For multiple image uploads
 <input 
 	type="hidden" 
 	name="attachments" 
 	value="{{ collect($attachments)->map(fn($item) => $item->getFilename())->implode(',') }}"
 />
-
 ```
 
-> **Note:** You have to manually upload from temp location to your desired destination after receiving the image file in your controller.
+> **Note:** You have to manually upload to your desired destination after receiving the image file in your controller.
 
 Sample Controller code is given below:
 
@@ -99,7 +173,7 @@ class Multiple extends Controller
     }
 }
 ```
-> **Note:** I have not tested this exact code by the way. This is just a pseudo code so that one can get the idea.
+> **Note:** I have not tested this exact code by the way. This is just a example code so that one can get the idea.
 
 ## References
 
