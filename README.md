@@ -19,6 +19,8 @@ npx mix
 - [Laravel Livewire](https://laravel-livewire.com/)
 - [AlpineJS](https://github.com/alpinejs/alpine/)
 
+After installation is complete visit the url ```/example-one```.
+
 ## Livewire Component
 
 ```php
@@ -40,8 +42,8 @@ class Profile extends Component
 	public function updatedAvatar()
   {
     $this->validate([
-          'avatar' => ['required', 'mimes:jpeg,jpg,png', 'max:1024', 'dimensions:min_width=250,min_height=250'],
-      ]);
+      'avatar' => ['required', 'mimes:jpeg,jpg,png', 'max:1024', 'dimensions:min_width=250,min_height=250'],
+    ]);
   }
 
 	public function save() 
@@ -57,7 +59,7 @@ class Profile extends Component
 
   public function render()
   {
-      return view('livewire.profile');
+    return view('livewire.profile');
   }
 }
 ```
@@ -104,9 +106,9 @@ class Profile extends Component
 ```php
 // For multiple image uploads
 <input 
-	type="hidden" 
-	name="attachments" 
-	value="{{ collect($attachments)->map(fn($item) => $item->getFilename())->implode(',') }}"
+  type="hidden" 
+  name="attachments" 
+  value="{{ collect($attachments)->map(fn($item) => $item->getFilename())->implode(',') }}"
 />
 ```
 
