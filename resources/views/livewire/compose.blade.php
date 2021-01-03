@@ -1,5 +1,4 @@
 <div>
-   
     <!-- Title -->
     <div>
         <x-label for="title" value="Title" />
@@ -13,13 +12,10 @@
 
         <x-input-error for="title" class="mt-2" />
     </div>
-
-    {{-- Send file in hidden field incase of regular blade form submit --}}   
-    {{-- <input type="hidden" name="attachment" value="{{ $attachment->getFilename() }}"> --}}
-
+ 
     <!-- Attachment -->
     <div class="mt-4">
-        <x-label for="attachment" value="Attachment" />
+        <x-label for="attachment" value="Attachment" class="mb-1" />
 
         <x-file-attachment 
         	:file="$attachment"

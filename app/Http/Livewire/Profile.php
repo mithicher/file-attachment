@@ -27,6 +27,8 @@ class Profile extends Component
 			'bio' => ['required'],
 			'avatar' => ['required', 'mimes:jpeg,jpg,png', 'max:1024', 'dimensions:min_width=250,min_height=250'],
 		]);
+
+		ddd($this->avatar);
 	}
 
     public function render()

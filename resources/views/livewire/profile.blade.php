@@ -2,7 +2,7 @@
 
     <!-- Avatar -->
     <div>
-        <x-label for="avatar" value="Profile image" />
+        <x-label for="avatar" value="Profile image" class="mb-1" />
 
         <x-file-attachment 
             :file="$avatar"
